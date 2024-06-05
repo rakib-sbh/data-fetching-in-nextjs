@@ -18,14 +18,18 @@ const headingStyle = {
 };
 
 const ProductPage = async () => {
-  const response = await fetch("http://localhost:3001/products");
+  const response = await fetch("http://localhost:3001/products", {
+    next: {
+      revalidate: 10,
+    },
+  });
   const products = await response.json();
 
-  const cookieStore = cookies();
-  cookieStore.get("theme");
+  // const cookieStore = cookies();
+  // cookieStore.get("theme");
 
-  const detailsResponse = await fetch("http://localhost:3001/products/1");
-  const details = await detailsResponse.json();
+  // const detailsResponse = await fetch("http://localhost:3001/products/1");
+  // const details = await detailsResponse.json();
   return (
     <>
       <h1 style={headingStyle}>All Products</h1>
@@ -39,7 +43,7 @@ const ProductPage = async () => {
         );
       })}
 
-      <div style={productStyle}>{details.description}</div>
+      {/* <div style={productStyle}>{details.description}</div> */}
     </>
   );
 };
